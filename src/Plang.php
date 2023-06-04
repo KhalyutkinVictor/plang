@@ -56,10 +56,18 @@ class Plang
             $context = new Context([], $this->context);
         }
         foreach ($program as $statement) {
-            if (gettype($statement) !== 'array') {
-                throw new \Exception("Statement is not list");
+            if (gettype($statement) === 'array') {
+                $res = $this->processList($statement, $context);
+                continue;
             }
-            $res = $this->processList($statement, $context);
+            if (gettype($statement) === 'string') {
+                $statement = $context->get($statement);
+            }
+            if ($statement instanceof Scalar || $statement instanceof IFunc) {
+                $res = $statement;
+                continue;
+            }
+            throw new \Exception("Unexpected statement " . print_r($statement, 1));
         }
         return $res;
     }

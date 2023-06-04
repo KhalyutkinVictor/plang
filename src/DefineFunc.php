@@ -30,7 +30,7 @@ class DefineFunc implements IFunc
         }
         if ($value instanceof Scalar || $value instanceof IFunc) {
             $ctx->add($name, $value);
-            return null;
+            return $value;
         }
         throw new \Exception("Value is not of scalar type");
     }
