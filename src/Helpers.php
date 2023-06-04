@@ -32,4 +32,31 @@ class Helpers
         return $res;
     }
 
+    public function getValue($val, IContext $ctx)
+    {
+        if (gettype($val) === 'string') {
+            $val = $ctx->get($val);
+        }
+        if (gettype($val) === 'array') {
+            $val = $this->plang->processList($val, $ctx);
+        }
+        return $val;
+    }
+
+    public function isFirstClass(mixed $val): bool
+    {
+        if ($val instanceof Scalar || $val instanceof IFunc) {
+            return true;
+        }
+        return false;
+    }
+
+    public function throwIfNotFirstClass(mixed $val, string $err)
+    {
+        if ($this->isFirstClass($val)) {
+            return;
+        }
+        throw new \Exception("Value is not first class object\n" . $err);
+    }
+
 }

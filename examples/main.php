@@ -30,5 +30,22 @@ $plang->execute([
     ['print', sclr("The inc 3 is:")],
     ['print', ['inc 3']],
     ['print', sclr("The inc 2 is:")],
-    ['print', [['closure', sclr(2)]]]
+    ['print', [['closure', sclr(2)]]],
+
+    ['cond', sclr(3),
+        [['+', sclr(2), sclr(1)], ['print', sclr("3 = 2 + 1")]],
+        [sclr(3), ['print', sclr("This never be printed")]]
+    ],
+
+    ['cond', sclr(3),
+        [['+', sclr(2), sclr(2)], ['print', sclr("This never be printed")]],
+        [sclr(3), ['print', ['+', sclr(100), sclr(100)]]]
+    ],
+
+    ['cond', sclr(3),
+        [['+', sclr(2), sclr(2)], ['print', sclr("This never be printed")]],
+        [sclr(4), ['print', sclr("This never be printed too")]],
+        ['else', ['print', sclr("Else statement work :)")]]
+    ]
+
 ]);

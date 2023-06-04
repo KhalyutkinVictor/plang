@@ -32,6 +32,8 @@ class Plang
         $this->context->add('fn', new LambdaFunc($this));
         $this->context->add('print', new PrintFunc($this));
         $this->context->add('+', new PlusFunc($this));
+        $this->context->add('=', new EqualsFunc($this));
+        $this->context->add('cond', new CondFunc($this));
     }
 
     public function processList(array $list, IContext $context): mixed

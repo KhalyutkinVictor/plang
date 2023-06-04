@@ -29,7 +29,7 @@ class PrintFunc implements IFunc
             }
             echo $arg . "\n";
         }
-        return null;
+        return new Scalar(null);
     }
 
     public function isSystem(): bool
