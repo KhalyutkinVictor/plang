@@ -27,5 +27,8 @@ $plang->execute([
         'inc x'
     ]]],
     ['the', 'inc 3', ['closure', sclr(3)]],
-    ['print', ['inc 3']]
+    ['print', sclr("The inc 3 is:")],
+    ['print', ['inc 3']],
+    ['print', sclr("The inc 2 is:")],
+    ['print', [['closure', sclr(2)]]]
 ]);

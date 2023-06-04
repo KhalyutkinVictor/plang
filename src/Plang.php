@@ -37,7 +37,16 @@ class Plang
     public function processList(array $list, IContext $context): mixed
     {
         $fnname = array_shift($list);
-        $fn = $context->get($fnname);
+        if ($fnname instanceof IFunc) {
+            $fn = $fnname;
+        } elseif (gettype($fnname) === 'string') {
+            $fn = $context->get($fnname);
+        } elseif (gettype($fnname) === 'array') {
+            $fn = $this->processList($fnname, $context);
+        } else {
+            throw new \Exception("First argument should be a function\n"
+                . print_r($list, 1));
+        }
         $args = $list;
         if (!($fn instanceof IFunc)) {
             throw new \Exception("{$fnname} is not a function");
