@@ -46,6 +46,16 @@ $plang->execute([
         [['+', sclr(2), sclr(2)], ['print', sclr("This never be printed")]],
         [sclr(4), ['print', sclr("This never be printed too")]],
         ['else', ['print', sclr("Else statement work :)")]]
-    ]
+    ],
+
+    ['the', 'rec', ['fn', ['x'], [
+        ['print', 'x'],
+        ['cond', sclr(5),
+            ['x', ['print', sclr("Done!!!")]],
+            ['else', ['rec', ['+', 'x', sclr(1)]]]
+        ]
+    ]]],
+
+    ['rec', sclr(1)]
 
 ]);
