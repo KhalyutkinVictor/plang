@@ -19,8 +19,24 @@ class Func implements IFunc
     {
         $this->context = $parentCtx;
         $this->plang = $plang;
-        $this->args = $args;
+        $this->initArgs($args);
         $this->program = $program;
+    }
+
+    private function initArgs($args)
+    {
+        $isOptional = false;
+        $this->args = [];
+        foreach ($args as $arg) {
+            if ($arg === '&optional') {
+                $isOptional = true;
+                continue;
+            }
+            $this->args[] = [
+                'name' => $arg,
+                'isOptional' => $isOptional
+            ];
+        }
     }
  
     private function getVar($name)
@@ -38,9 +54,13 @@ class Func implements IFunc
     {
         foreach ($this->args as $k => $v) {
             if (array_key_exists($k, $args)) {
-                $this->callContext->add($this->args[$k], $args[$k]);
+                $this->callContext->add($v['name'], $args[$k]);
+            } elseif ($v['isOptional']) {
+                $this->callContext->add($v['name'], new Scalar(null));
             } else {
-                $this->callContext->add($this->args[$k], new Scalar(null));
+                $fnArgsCnt = count($this->args);
+                $factArgsCnt = count($args);
+                throw new \Exception("Function has {$fnArgsCnt} arguments, but receive {$factArgsCnt}");
             }
         }
     }

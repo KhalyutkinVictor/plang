@@ -8,7 +8,7 @@ class StdFunctions
 
     public static function ifArgs()
     {
-        return ['a', 'thenf', 'elsef'];
+        return ['a', 'thenf',  '&optional', 'elsef'];
     }
 
     public static function if()
