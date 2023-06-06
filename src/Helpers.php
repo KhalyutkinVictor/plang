@@ -59,4 +59,12 @@ class Helpers
         throw new \Exception("Value is not first class object\n" . $err);
     }
 
+    public function checkExactArgsCount(array $args, int $count, $fname = '')
+    {
+        if (count($args) !== $count) {
+            throw new \Exception("Function {$fname} waits exact {$count} arguments, but receive "
+                . count($args) . " arguments\n");
+        }
+    }
+
 }

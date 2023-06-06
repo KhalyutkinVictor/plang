@@ -36,8 +36,12 @@ class Func implements IFunc
 
     private function associateArgs(array $args): void
     {
-        foreach ($args as $k => $v) {
-            $this->callContext->add($this->args[$k], $v);
+        foreach ($this->args as $k => $v) {
+            if (array_key_exists($k, $args)) {
+                $this->callContext->add($this->args[$k], $args[$k]);
+            } else {
+                $this->callContext->add($this->args[$k], new Scalar(null));
+            }
         }
     }
 
@@ -50,11 +54,11 @@ class Func implements IFunc
     public function call(IContext $ctx, array $args = [])
     {
         $this->callContext = $ctx;
-        if (count($this->args) !== count($args)) {
-            $fnArgsCnt = count($this->args);
-            $factArgsCnt = count($args);
-            throw new \Exception("Function has {$fnArgsCnt} arguments, but receive {$factArgsCnt}");
-        }
+//        if (count($this->args) !== count($args)) {
+//            $fnArgsCnt = count($this->args);
+//            $factArgsCnt = count($args);
+//            throw new \Exception("Function has {$fnArgsCnt} arguments, but receive {$factArgsCnt}");
+//        }
         $this->associateArgs($args);
         return $this->exec();
     }

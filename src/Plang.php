@@ -28,12 +28,21 @@ class Plang
 
         $this->helpers = new Helpers($this);
         $this->context = new Context($ctx);
+
         $this->context->add('the', new DefineFunc($this));
         $this->context->add('fn', new LambdaFunc($this));
         $this->context->add('print', new PrintFunc($this));
-        $this->context->add('+', new PlusFunc($this));
-        $this->context->add('=', new EqualsFunc($this));
         $this->context->add('cond', new CondFunc($this));
+        $this->context->add('if', new Func($this, StdFunctions::ifArgs(), StdFunctions::if(), $this->context));
+
+        $this->context->add('+', new PlusFunc($this));
+
+        $this->context->add('=', new EqualsFunc($this));
+        $this->context->add('>', new CompareFunc($this, [CompareFunc::class, 'greater'], '>'));
+        $this->context->add('>=', new CompareFunc($this, [CompareFunc::class, 'greaterOrEqual'], '>='));
+        $this->context->add('<', new CompareFunc($this, [CompareFunc::class, 'less'], '<'));
+        $this->context->add('<=', new CompareFunc($this, [CompareFunc::class, 'lessOrEqual'], '<='));
+
     }
 
     public function processList(array $list, IContext $context): mixed
@@ -45,11 +54,16 @@ class Plang
             $fn = $context->get($fnname);
         } elseif (gettype($fnname) === 'array') {
             $fn = $this->processList($fnname, $context);
+        } elseif ($fnname instanceof Scalar) {
+            $fn = $fnname;
         } else {
             throw new \Exception("First argument should be a function\n"
                 . print_r($list, 1));
         }
         $args = $list;
+        if ($fn instanceof Scalar && empty($list)) {
+            return $fn;
+        }
         if (!($fn instanceof IFunc)) {
             throw new \Exception("{$fnname} is not a function");
         }

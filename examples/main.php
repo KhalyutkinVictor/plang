@@ -56,6 +56,24 @@ $plang->execute([
         ]
     ]]],
 
-    ['rec', sclr(1)]
+    ['rec', sclr(1)],
+
+    ['the', 'isTwo?', ['fn', ['a'], [
+        ['=', 'a', sclr(2)]
+    ]]],
+
+    ['print', ['if', ['isTwo?', sclr(2)],
+        sclr("2 is 2"),
+        sclr("2 is not 2. What ?!?!?!")
+    ]],
+
+    ['if', ['isTwo?', sclr(3)],
+        ['fn', [], [['print', sclr("3 is 2. What !?!?!??!?!?")]]],
+        ['fn', [], [['print', sclr("3 is not 2")]]]
+    ],
+
+    ['if', ['>', sclr(2), sclr(1)],
+        ['fn', [], [['print', sclr("2 more than 1")]]],
+    ]
 
 ]);
