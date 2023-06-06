@@ -79,6 +79,12 @@ $plang->execute([
     ['if', ['<', sclr(2), sclr(1)],
         [sclr("By the way this code is unreachable")],
         ['fn', [], [['print', sclr("1 is not more then 2")]]]
-    ]
+    ],
+
+    ['print', ['+', sclr(4), sclr(3)]],
+    ['print', ['-', sclr(4), sclr(3)]],
+    ['print', ['*', sclr(4), sclr(3)]],
+    ['print', ['/', sclr(4), sclr(3)]],
+    ['print', ['%', sclr(4), sclr(3)]]
 
 ]);

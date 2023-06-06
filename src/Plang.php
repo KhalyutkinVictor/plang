@@ -35,7 +35,11 @@ class Plang
         $this->context->add('cond', new CondFunc($this));
         $this->context->add('if', new Func($this, StdFunctions::ifArgs(), StdFunctions::if(), $this->context));
 
-        $this->context->add('+', new PlusFunc($this));
+        $this->context->add('+', new MathFunc($this, [MathFunc::class, 'plus'], '+'));
+        $this->context->add('-', new MathFunc($this, [MathFunc::class, 'minus'], '-'));
+        $this->context->add('*', new MathFunc($this, [MathFunc::class, 'mult'], '*'));
+        $this->context->add('/', new MathFunc($this, [MathFunc::class, 'div'], '/'));
+        $this->context->add('%', new MathFunc($this, [MathFunc::class, 'mod'], '%'));
 
         $this->context->add('=', new EqualsFunc($this));
         $this->context->add('>', new CompareFunc($this, [CompareFunc::class, 'greater'], '>'));
