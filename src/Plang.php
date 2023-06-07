@@ -34,6 +34,7 @@ class Plang
         $this->context->add('print', new PrintFunc($this));
         $this->context->add('cond', new CondFunc($this));
         $this->context->add('if', new Func($this, StdFunctions::ifArgs(), StdFunctions::if(), $this->context));
+        $this->context->add('dprint', new DprintFunc($this));
 
         $this->context->add('+', new MathFunc($this, [MathFunc::class, 'plus'], '+'));
         $this->context->add('-', new MathFunc($this, [MathFunc::class, 'minus'], '-'));
@@ -46,6 +47,10 @@ class Plang
         $this->context->add('>=', new CompareFunc($this, [CompareFunc::class, 'greaterOrEqual'], '>='));
         $this->context->add('<', new CompareFunc($this, [CompareFunc::class, 'less'], '<'));
         $this->context->add('<=', new CompareFunc($this, [CompareFunc::class, 'lessOrEqual'], '<='));
+
+        $this->context->add('arr-get', new ArrayGetFunc($this));
+        $this->context->add('arr-has', new ArrayHasFunc($this));
+        $this->context->add('arr-set', new ArraySetFunc($this));
 
     }
 

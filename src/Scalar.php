@@ -17,4 +17,9 @@ class Scalar
         return $this->val;
     }
 
+    public function set($val)
+    {
+        $this->val = $val;
+    }
+
 }

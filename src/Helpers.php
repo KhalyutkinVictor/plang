@@ -59,11 +59,20 @@ class Helpers
         throw new \Exception("Value is not first class object\n" . $err);
     }
 
-    public function checkExactArgsCount(array $args, int $count, $fname = '')
+    public function checkExactArgsCount(array $args, int $count, string $fname = '')
     {
         if (count($args) !== $count) {
             throw new \Exception("Function {$fname} waits exact {$count} arguments, but receive "
                 . count($args) . " arguments\n");
+        }
+    }
+
+    public function checkIfArgumentsIsScalar(array $args, string $fname = '')
+    {
+        foreach ($args as $arg) {
+            if (!($arg instanceof Scalar)) {
+                throw new \Exception("Function {$fname} arguments should be scalar");
+            }
         }
     }
 

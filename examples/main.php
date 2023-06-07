@@ -85,6 +85,14 @@ $plang->execute([
     ['print', ['-', sclr(4), sclr(3)]],
     ['print', ['*', sclr(4), sclr(3)]],
     ['print', ['/', sclr(4), sclr(3)]],
-    ['print', ['%', sclr(4), sclr(3)]]
+    ['print', ['%', sclr(4), sclr(3)]],
+
+    ['the', 'array', sclr([])],
+
+    ['arr-set', 'array', sclr("someKeyName"), sclr(12)],
+    ['dprint', 'array'],
+    ['print', ['arr-has', 'array', sclr("someKeyName")]],
+    ['print', ['arr-get', 'array', sclr("someKeyName")]]
+
 
 ]);
