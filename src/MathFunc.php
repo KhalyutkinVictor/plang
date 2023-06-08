@@ -23,16 +23,12 @@ class MathFunc implements IFunc
         if (empty($args)) {
             throw new \Exception("Function {$this->fname} needs at least one argument");
         }
+        $this->plang->helpers->checkIfArgumentsIsScalar($args, $this->fname);
+        $a = [];
         foreach ($args as $arg) {
-            if (!($arg instanceof Scalar)) {
-                throw new \Exception("Argument is not scalar");
-            }
+            $a[] = $arg->get();
         }
-        $sum = $args[0]->get();
-        for ($i = 1; $i < count($args); $i++) {
-            $sum = call_user_func($this->fn, $sum, $args[$i]->get());
-        }
-        return new Scalar($sum);
+        return new Scalar(call_user_func($this->fn, ...$a));
     }
 
     public function isSystem(): bool
@@ -40,29 +36,52 @@ class MathFunc implements IFunc
         return false;
     }
 
-    public static function plus($a, $b)
+    public static function plus(...$args)
     {
-        return $a + $b;
+        $s = 0;
+        foreach ($args as $arg) {
+            $s += $arg;
+        }
+        return $s;
     }
 
-    public static function minus($a, $b)
+    public static function minus(...$args)
     {
-        return $a - $b;
+        if (count($args) === 1) {
+            return -$args[0];
+        }
+        $s = $args[0];
+        for ($i = 1; $i < count($args); $i++) {
+            $s -= $args[$i];
+        }
+        return $s;
     }
 
-    public static function div($a, $b)
+    public static function div(...$args)
     {
-        return $a / $b;
+        $s = $args[0];
+        for ($i = 1; $i < count($args); $i++) {
+            $s /= $args[$i];
+        }
+        return $s;
     }
 
-    public static function mult($a, $b)
+    public static function mult(...$args)
     {
-        return $a * $b;
+        $s = $args[0];
+        for ($i = 1; $i < count($args); $i++) {
+            $s *= $args[$i];
+        }
+        return $s;
     }
 
-    public static function mod($a, $b)
+    public static function mod(...$args)
     {
-        return $a % $b;
+        $s = $args[0];
+        for ($i = 1; $i < count($args); $i++) {
+            $s %= $args[$i];
+        }
+        return $s;
     }
 
 }

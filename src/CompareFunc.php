@@ -62,4 +62,14 @@ class CompareFunc implements IFunc
         return $a <= $b;
     }
 
+    public static function or($a, $b)
+    {
+        return $a || $b;
+    }
+
+    public static function and($a, $b)
+    {
+        return $a && $b;
+    }
+
 }

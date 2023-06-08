@@ -81,14 +81,48 @@ $plang->execute([
         ['fn', [], [['print', sclr("1 is not more then 2")]]]
     ],
 
+    ['print', sclr("-------------------")],
     ['print', ['+', sclr(4), sclr(3)]],
     ['print', ['-', sclr(4), sclr(3)]],
     ['print', ['*', sclr(4), sclr(3)]],
     ['print', ['/', sclr(4), sclr(3)]],
     ['print', ['%', sclr(4), sclr(3)]],
+    ['print', ['-', sclr(5)]],
+    ['print', sclr("-------------------")],
+
+    ['print', sclr("1 and null")],
+    ['print', ['if', ['and', sclr(1), sclr(null)], sclr("True"), sclr("False")]],
+
+    ['print', sclr("0 and null")],
+    ['print', ['if', ['and', sclr(0), sclr(null)], sclr("True"), sclr("False")]],
+
+    ['print', sclr("1 and true")],
+    ['print', ['if', ['and', sclr(1), sclr(true)], sclr("True"), sclr("False")]],
+
+    ['print', sclr("1 or null")],
+    ['print', ['if', ['or', sclr(1), sclr(null)], sclr("True"), sclr("False")]],
+
+    ['print', sclr("0 or null")],
+    ['print', ['if', ['or', sclr(0), sclr(null)], sclr("True"), sclr("False")]],
+
+    ['print', sclr("1 or true")],
+    ['print', ['if', ['and', sclr(1), sclr(true)], sclr("True"), sclr("False")]],
+
+    ['print', sclr("Not \"1212\"")],
+    ['print', ['if', ['not', sclr("1212")], sclr("True"), sclr("False")]],
+
+    ['print', sclr("Not 0")],
+    ['print', ['if', ['not', sclr(0)], sclr("True"), sclr("False")]],
+
+    ['print', sclr("Not false")],
+    ['print', ['if', ['not', sclr(false)], sclr("True"), sclr("False")]],
+
+    ['print', sclr("Not true")],
+    ['print', ['if', ['not', sclr(true)], sclr("True"), sclr("False")]],
+
+    ['print', sclr("-------------------")],
 
     ['the', 'array', sclr([])],
-
     ['arr-set', 'array', sclr("someKeyName"), sclr(12)],
     ['dprint', 'array'],
     ['print', ['arr-has', 'array', sclr("someKeyName")]],

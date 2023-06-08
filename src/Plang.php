@@ -47,6 +47,9 @@ class Plang
         $this->context->add('>=', new CompareFunc($this, [CompareFunc::class, 'greaterOrEqual'], '>='));
         $this->context->add('<', new CompareFunc($this, [CompareFunc::class, 'less'], '<'));
         $this->context->add('<=', new CompareFunc($this, [CompareFunc::class, 'lessOrEqual'], '<='));
+        $this->context->add('and', new CompareFunc($this, [CompareFunc::class, 'and'], 'and'));
+        $this->context->add('or', new CompareFunc($this, [CompareFunc::class, 'or'], 'or'));
+        $this->context->add('not', new NotFunc($this));
 
         $this->context->add('arr-get', new ArrayGetFunc($this));
         $this->context->add('arr-has', new ArrayHasFunc($this));
