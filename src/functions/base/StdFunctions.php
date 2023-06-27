@@ -1,8 +1,9 @@
 <?php
 
-namespace Plang;
+namespace Plang\functions\base;
 
-// TODO make cond, +, -, etc like static::cond, static::plus
+use Plang\Scalar;
+
 class StdFunctions
 {
 

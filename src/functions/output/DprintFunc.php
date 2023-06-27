@@ -1,6 +1,10 @@
 <?php
 
-namespace Plang;
+namespace Plang\functions\output;
+
+use Plang\IContext;
+use Plang\IFunc;
+use Plang\Plang;
 
 class DprintFunc implements IFunc
 {

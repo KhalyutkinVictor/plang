@@ -1,6 +1,11 @@
 <?php
 
-namespace Plang;
+namespace Plang\functions\logical;
+
+use Plang\IContext;
+use Plang\IFunc;
+use Plang\Plang;
+use Plang\Scalar;
 
 class CompareFunc implements IFunc
 {

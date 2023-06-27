@@ -1,6 +1,12 @@
 <?php
 
-namespace Plang;
+namespace Plang\functions\base;
+
+use Plang\FuncContext;
+use Plang\IContext;
+use Plang\IFunc;
+use Plang\Plang;
+use Plang\Scalar;
 
 class Func implements IFunc
 {
@@ -74,11 +80,6 @@ class Func implements IFunc
     public function call(IContext $ctx, array $args = [])
     {
         $this->callContext = $ctx;
-//        if (count($this->args) !== count($args)) {
-//            $fnArgsCnt = count($this->args);
-//            $factArgsCnt = count($args);
-//            throw new \Exception("Function has {$fnArgsCnt} arguments, but receive {$factArgsCnt}");
-//        }
         $this->associateArgs($args);
         return $this->exec();
     }

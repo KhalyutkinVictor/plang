@@ -2,6 +2,21 @@
 
 namespace Plang;
 
+use Plang\functions\array\ArrayGetFunc;
+use Plang\functions\array\ArrayHasFunc;
+use Plang\functions\array\ArraySetFunc;
+use Plang\functions\base\ClosureFunc;
+use Plang\functions\base\CondFunc;
+use Plang\functions\base\DefineFunc;
+use Plang\functions\base\Func;
+use Plang\functions\base\LambdaFunc;
+use Plang\functions\base\StdFunctions;
+use Plang\functions\logical\CompareFunc;
+use Plang\functions\logical\EqualsFunc;
+use Plang\functions\logical\NotFunc;
+use Plang\functions\math\MathFunc;
+use Plang\functions\output\DprintFunc;
+use Plang\functions\output\PrintFunc;
 use Plang\Scalar;
 
 class Plang

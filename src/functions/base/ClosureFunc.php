@@ -1,6 +1,11 @@
 <?php
 
-namespace Plang;
+namespace Plang\functions\base;
+
+use Plang\IContext;
+use Plang\IFunc;
+use Plang\Plang;
+use Plang\Scalar;
 
 class ClosureFunc implements IFunc
 {
@@ -17,7 +22,11 @@ class ClosureFunc implements IFunc
 
     public function call(IContext $ctx, array $args)
     {
-        return call_user_func($this->fn, ...$args);
+        $a = [];
+        foreach ($args as $arg) {
+            $a[] = $arg->get();
+        }
+        return new Scalar(call_user_func($this->fn, ...$a));
     }
 
     public function isSystem(): bool

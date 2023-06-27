@@ -1,8 +1,13 @@
 <?php
 
-namespace Plang;
+namespace Plang\functions\array;
 
-class ArrayGetFunc implements IFunc
+use Plang\IContext;
+use Plang\IFunc;
+use Plang\Plang;
+use Plang\Scalar;
+
+class ArrayHasFunc implements IFunc
 {
 
     private Plang $plang;
@@ -14,25 +19,22 @@ class ArrayGetFunc implements IFunc
 
     public function call(IContext $ctx, array $args)
     {
-        $this->plang->helpers->checkExactArgsCount($args, 2, 'arr-get');
-        $this->plang->helpers->checkIfArgumentsIsScalar($args, 'arr-get');
+        $this->plang->helpers->checkExactArgsCount($args, 2, 'arr-has');
+        $this->plang->helpers->checkIfArgumentsIsScalar($args, 'arr-has');
         $arr = $args[0]->get();
         $key = $args[1]->get();
         if (gettype($arr) !== 'array') {
             $t = gettype($arr);
-            throw new \Exception("Function arr-get argument should be array, {$t} given");
+            throw new \Exception("Function arr-has argument should be array, {$t} given");
         }
         $ktype = gettype($key);
         if ($ktype !== 'string' && $ktype !== 'integer') {
             throw new \Exception("Key should be string or integer");
         }
         if (!array_key_exists($key, $arr)) {
-            throw new \Exception("Key {$key} does not exists in array");
+            return new Scalar(false);
         }
-        if ($arr[$key] instanceof IFunc || $arr[$key] instanceof Scalar) {
-            return $arr[$key];
-        }
-        return new Scalar($arr[$key]);
+        return new Scalar(true);
     }
 
     public function isSystem(): bool
