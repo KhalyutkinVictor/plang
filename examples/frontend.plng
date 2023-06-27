@@ -1,0 +1,10 @@
+(the five 5)
+
+(if (= five 5)
+    (fn () (
+        (print "Five equals 5")
+    ))
+    (fn () (
+        (print "This code is unreachable")
+    ))
+)

@@ -1,0 +1,76 @@
+Array
+(
+    [0] => Array
+        (
+            [0] => the
+            [1] => five
+            [2] => Plang\Scalar Object
+                (
+                    [val:Plang\Scalar:private] => 5
+                )
+
+        )
+
+    [1] => Array
+        (
+            [0] => if
+            [1] => Array
+                (
+                    [0] => =
+                    [1] => five
+                    [2] => Plang\Scalar Object
+                        (
+                            [val:Plang\Scalar:private] => 5
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [0] => fn
+                    [1] => Array
+                        (
+                        )
+
+                    [2] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [0] => print
+                                    [1] => Plang\Scalar Object
+                                        (
+                                            [val:Plang\Scalar:private] => Five equals 5
+                                        )
+
+                                )
+
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [0] => fn
+                    [1] => Array
+                        (
+                        )
+
+                    [2] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [0] => print
+                                    [1] => Plang\Scalar Object
+                                        (
+                                            [val:Plang\Scalar:private] => This code is unreachable
+                                        )
+
+                                )
+
+                        )
+
+                )
+
+        )
+
+)

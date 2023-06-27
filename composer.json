@@ -14,5 +14,7 @@
             "email": "Khalutkin1@yandex.ru"
         }
     ],
-    "require": {}
+    "require": {
+      "ext-mbstring": "*"
+    }
 }
