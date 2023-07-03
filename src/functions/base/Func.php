@@ -2,6 +2,7 @@
 
 namespace Plang\functions\base;
 
+use Plang\Context;
 use Plang\FuncContext;
 use Plang\IContext;
 use Plang\IFunc;
@@ -79,7 +80,7 @@ class Func implements IFunc
 
     public function call(IContext $ctx, array $args = [])
     {
-        $this->callContext = $ctx;
+        $this->callContext = new Context([], $ctx);
         $this->associateArgs($args);
         return $this->exec();
     }

@@ -1,0 +1,13 @@
+(the fib (
+    fn (x) (
+        (cond x
+            (1 1)
+            (2 1)
+            (else
+                (+ (fib (- x 1)) (fib (- x 2)))
+            )
+        )
+    )
+))
+
+(print (fib 6))

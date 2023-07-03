@@ -70,6 +70,9 @@ class Plang
         $this->context->add('arr-has', new ArrayHasFunc($this));
         $this->context->add('arr-set', new ArraySetFunc($this));
 
+        $this->context->add('true', new Scalar(true));
+        $this->context->add('false', new Scalar(false));
+
     }
 
     public function processList(array $list, IContext $context): mixed

@@ -4,17 +4,14 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-//if ($argc <= 1) {
-//    echo "Not enough arguments. At least one expected.\n";
-//    exit(12);
-//}
+if ($argc <= 1) {
+    echo "Not enough arguments. At least one expected.\n";
+    exit(12);
+}
 
 $parser = new \Plang\frontend\Parser();
 $file = $argv[1];
-$file = __DIR__ . '/examples/frontend.plng';
 $program = $parser->parse($file);
-
-file_put_contents('examples/out', print_r($program, 1));
 
 $plang = new \Plang\Plang([]);
 $plang->execute($program);
