@@ -14,5 +14,7 @@ $file = $argv[1];
 $program = $parser->parse($file);
 
 $plang = new \Plang\Plang([]);
+$plang->addPackage(new \Plang\package\StdPackage());
+
 $plang->execute($program);
 

@@ -89,4 +89,13 @@ class MathFunc implements IFunc
         return $s;
     }
 
+    public static function pow(...$args)
+    {
+        if (count($args) !== 2) {
+            // TODO make something good
+            throw new \Exception("Function pow expect exact 2 arguments");
+        }
+        return \pow($args[0], $args[1]);
+    }
+
 }

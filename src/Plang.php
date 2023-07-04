@@ -17,14 +17,20 @@ use Plang\functions\logical\NotFunc;
 use Plang\functions\math\MathFunc;
 use Plang\functions\output\DprintFunc;
 use Plang\functions\output\PrintFunc;
+use Plang\package\IPackage;
 use Plang\Scalar;
 
 class Plang
 {
 
-    private $context;
+    private IContext $context;
 
     public Helpers $helpers;
+
+    /**
+     * @var string[]
+     */
+    private array $addedPackages = [];
 
     public function __construct(array $additionals)
     {
@@ -43,35 +49,6 @@ class Plang
 
         $this->helpers = new Helpers($this);
         $this->context = new Context($ctx);
-
-        $this->context->add('the', new DefineFunc($this));
-        $this->context->add('fn', new LambdaFunc($this));
-        $this->context->add('print', new PrintFunc($this));
-        $this->context->add('cond', new CondFunc($this));
-        $this->context->add('if', new Func($this, StdFunctions::ifArgs(), StdFunctions::if(), $this->context));
-        $this->context->add('dprint', new DprintFunc($this));
-
-        $this->context->add('+', new MathFunc($this, [MathFunc::class, 'plus'], '+'));
-        $this->context->add('-', new MathFunc($this, [MathFunc::class, 'minus'], '-'));
-        $this->context->add('*', new MathFunc($this, [MathFunc::class, 'mult'], '*'));
-        $this->context->add('/', new MathFunc($this, [MathFunc::class, 'div'], '/'));
-        $this->context->add('%', new MathFunc($this, [MathFunc::class, 'mod'], '%'));
-
-        $this->context->add('=', new EqualsFunc($this));
-        $this->context->add('>', new CompareFunc($this, [CompareFunc::class, 'greater'], '>'));
-        $this->context->add('>=', new CompareFunc($this, [CompareFunc::class, 'greaterOrEqual'], '>='));
-        $this->context->add('<', new CompareFunc($this, [CompareFunc::class, 'less'], '<'));
-        $this->context->add('<=', new CompareFunc($this, [CompareFunc::class, 'lessOrEqual'], '<='));
-        $this->context->add('and', new CompareFunc($this, [CompareFunc::class, 'and'], 'and'));
-        $this->context->add('or', new CompareFunc($this, [CompareFunc::class, 'or'], 'or'));
-        $this->context->add('not', new NotFunc($this));
-
-        $this->context->add('arr-get', new ArrayGetFunc($this));
-        $this->context->add('arr-has', new ArrayHasFunc($this));
-        $this->context->add('arr-set', new ArraySetFunc($this));
-
-        $this->context->add('true', new Scalar(true));
-        $this->context->add('false', new Scalar(false));
 
     }
 
@@ -125,6 +102,19 @@ class Plang
             throw new \Exception("Unexpected statement " . print_r($statement, 1));
         }
         return $res;
+    }
+
+    public function getContext(): IContext
+    {
+        return $this->context;
+    }
+
+    public function addPackage(IPackage $package)
+    {
+        if (!in_array($package::class, $this->addedPackages)) {
+            $this->addedPackages[] = $package::class;
+            $package->addTo($this);
+        }
     }
 
 }
